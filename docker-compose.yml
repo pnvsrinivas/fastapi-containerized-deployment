@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  fastapi1:
+    build: .
+    container_name: fastapi1
+    restart: always
+    expose:
+      - "8000"
+
+  fastapi2:
+    build: .
+    container_name: fastapi2
+    restart: always
+    expose:
+      - "8000"
+
+  fastapi3:
+    build: .
+    container_name: fastapi3
+    restart: always
+    expose:
+      - "8000"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_lb
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - fastapi1
+      - fastapi2
+      - fastapi3
