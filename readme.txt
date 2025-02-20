@@ -26,3 +26,13 @@ docker network inspect <network_name>
 docker-compose restart nginx
 
 curl -v http://localhost
+
+docker exec -it d64331698070 curl http://localhost
+
+---------------------
+
+netstat -ano | findstr LISTEN
+tasklist /FI "PID eq 12560"
+netstat -ano | findstr :80
+
+taskkill /PID 0 /F
